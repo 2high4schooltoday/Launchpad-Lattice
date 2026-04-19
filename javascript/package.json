@@ -1,0 +1,11 @@
+{
+  "name": "launchpad-lattice",
+  "version": "0.1.0",
+  "description": "Pure JavaScript parser and renderer for Launchpad Lattice",
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "scripts": {
+    "test": "node --test"
+  },
+  "license": "MIT"
+}

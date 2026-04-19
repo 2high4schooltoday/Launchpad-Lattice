@@ -13,12 +13,14 @@ It is intended for:
 
 The canonical file extension is `.l`.
 
-## Crate
+## Libraries
 
-This repository publishes the Rust crate:
+This repository now includes native implementations for:
 
-- package: `launchpad-lattice`
-- library: `launchpad_lattice`
+- Rust crate: `launchpad-lattice` / `launchpad_lattice`
+- Python package: `python/launchpad_lattice`
+- JavaScript package: `javascript`
+- Go module: `go`
 
 ## Example
 
@@ -51,6 +53,56 @@ let parsed: Defaults = from_str(
 
 let rendered = to_string_pretty(&parsed)?;
 ```
+
+## Python Usage
+
+```python
+from launchpad_lattice import dumps, loads
+
+parsed = loads(
+    "lattice 1.\n\ndata:\n  appId is \"hello\".\n  enabled is true.\n"
+)
+
+rendered = dumps(parsed)
+```
+
+## JavaScript Usage
+
+```js
+const { parse, stringify } = require("./javascript");
+
+const parsed = parse(`
+lattice 1.
+
+data:
+  appId is "hello".
+  enabled is true.
+`);
+
+const rendered = stringify(parsed);
+```
+
+## Go Usage
+
+```go
+package main
+
+import lattice "github.com/2high4schooltoday/Launchpad-Lattice/go"
+
+func main() {
+	parsed, _ := lattice.ParseDocument("lattice 1.\n\ndata:\n  appId is \"hello\".\n")
+	_, _ = lattice.Marshal(parsed)
+}
+```
+
+## Test Coverage
+
+Each implementation includes the same baseline behavior checks:
+
+- parse structured records, lists, and tagged strings
+- ignore non-`data` sections when `data` is present
+- round-trip render and parse
+- reject duplicate keys
 
 ## Specification
 
